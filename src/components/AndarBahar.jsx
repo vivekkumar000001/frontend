@@ -90,7 +90,7 @@ const AndarBaharGame = () => {
       setResultMessage("⚖️ It's a tie! Your money has been refunded.");
     } else if (matchedSide === selectedSide) {
       const grossWin = betAmount * 2;
-      const commission = grossWin * 0.09;
+      const commission = betAmount * 0.09;
       const netWin = grossWin - commission;
       const newBalance = wallet + netWin;
       updateUserBalance(newBalance);
