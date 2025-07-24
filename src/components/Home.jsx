@@ -3,7 +3,7 @@ import { FaGem, FaShieldAlt, FaMobileAlt, FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 // ✅ Correct video import
-import sampleVideo from '../assets/mainvideo.mp4'; // Make sure this is a valid video file
+import sampleVideo from '../assets/new.mp4'; // Make sure this is a valid video file
 
 const Home = () => {
   const [showVideoBox, setShowVideoBox] = useState(true);
