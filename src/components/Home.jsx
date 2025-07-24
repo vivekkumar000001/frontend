@@ -31,7 +31,7 @@ const Home = () => {
           </p>
 
           <motion.a
-            href="/Game"
+            href="/login"
             whileHover={{ y: -3 }}
             className="inline-block bg-gradient-to-r from-orange-500 to-orange-700 text-white py-2 px-5 sm:px-6 md:px-8 rounded-full font-semibold text-sm sm:text-base uppercase tracking-wide shadow-md hover:shadow-orange-500/50 transition-all"
           >
