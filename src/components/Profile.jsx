@@ -49,7 +49,7 @@ function Profile() {
   const handleDepositClick = (amount) => {
     setDepositAmount(amount);
     setShowQRCode(true);
-    setTimer(180);
+    setTimer(60);
     setShowRefInput(false);
     setRefSubmitted(false);
     setRefNumber('');
