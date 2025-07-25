@@ -54,7 +54,7 @@ const AndarBaharGame = () => {
     }).catch((err) => console.error("Balance update failed:", err));
   };
 
-  const dealCards = async (center) => {
+  const dealCards = async (center, initialBalance) => {
     const newAndar = [];
     const newBahar = [];
     let matchedSide = null;
@@ -86,16 +86,18 @@ const AndarBaharGame = () => {
     await new Promise((resolve) => setTimeout(resolve, 5000));
 
     if (!matchedSide) {
-      updateUserBalance(wallet + betAmount);
+      // Refund the bet amount
+      updateUserBalance(initialBalance);
       setResultMessage("⚖️ It's a tie! Your money has been refunded.");
     } else if (matchedSide === selectedSide) {
-      const grossWin = betAmount * 2;
-      const commission = betAmount * 0.09;
-      const netWin = grossWin - commission;
-      const newBalance = wallet + netWin;
+      // Calculate correct win amount (1.91x payout)
+      const payoutRate = 1.91;
+      const winAmount = betAmount * payoutRate;
+      const newBalance = initialBalance + winAmount;
       updateUserBalance(newBalance);
-      setResultMessage(`✅ You won ₹${grossWin} - ₹${commission.toFixed(2)} (9% commission) = ₹${netWin.toFixed(2)}`);
+      setResultMessage(`✅ You won ₹${winAmount.toFixed(2)} (including your bet returned)`);
     } else {
+      // Loss - no additional changes needed
       setResultMessage(`❌ You lost ₹${betAmount}`);
     }
 
@@ -104,15 +106,20 @@ const AndarBaharGame = () => {
 
   const placeBet = (side) => {
     if (isDealing || betAmount > wallet || betAmount <= 0) return;
+    
+    const initialBalance = wallet; // Capture balance before bet
     const center = getRandomCard();
+    
     setCenterCard(center);
-    updateUserBalance(wallet - betAmount);
+    updateUserBalance(wallet - betAmount); // Deduct bet amount
     setAndarCards([]);
     setBaharCards([]);
     setResultMessage("");
     setSelectedSide(side);
     setIsDealing(true);
-    dealCards(center);
+    
+    // Pass initial balance to dealCards
+    dealCards(center, initialBalance);
   };
 
   return (
