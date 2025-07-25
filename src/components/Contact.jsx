@@ -115,10 +115,21 @@ const ContactCard = ({ icon, title, items, description, button }) => {
         <p className="text-gray-300 mb-4">{description}</p>
       )}
       
-      {button && (
-        <button className="bg-gradient-to-r from-orange-500 to-orange-700 text-white py-2 px-4 rounded-lg font-medium w-full">
+      {button && title === "Live Chat" ? (
+        <a
+          href="https://t.me/+nQxMewxBhXljZjk1"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block text-center bg-gradient-to-r from-orange-500 to-orange-700 text-white py-2 px-4 rounded-lg font-medium w-full hover:opacity-90 transition"
+        >
           {button}
-        </button>
+        </a>
+      ) : (
+        button && (
+          <button className="bg-gradient-to-r from-orange-500 to-orange-700 text-white py-2 px-4 rounded-lg font-medium w-full">
+            {button}
+          </button>
+        )
       )}
     </div>
   );
